@@ -4,7 +4,7 @@
 //
 //  Created by MacBook on 12.02.2025.
 //
-
+//
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
