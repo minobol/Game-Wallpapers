@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA63C70D2D5E763800B84235 /* FullScreenImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA63C70C2D5E763800B84235 /* FullScreenImageViewController.swift */; };
 		FABD5FD52D5D0C1500BCEC74 /* GameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABD5FD42D5D0C1400BCEC74 /* GameCell.swift */; };
+		FABD5FD72D5E158000BCEC74 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABD5FD62D5E158000BCEC74 /* AboutViewController.swift */; };
+		FABD5FD92D5E213300BCEC74 /* PrivacyPolicyViewControlle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABD5FD82D5E213200BCEC74 /* PrivacyPolicyViewControlle.swift */; };
+		FABD5FDB2D5E32F600BCEC74 /* TermsConditionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABD5FDA2D5E32F600BCEC74 /* TermsConditionsViewController.swift */; };
 		FABE7B782D5CB2E3009C7A96 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE7B772D5CB2E3009C7A96 /* AppDelegate.swift */; };
 		FABE7B7A2D5CB2E3009C7A96 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE7B792D5CB2E3009C7A96 /* SceneDelegate.swift */; };
 		FABE7B7C2D5CB2E3009C7A96 /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE7B7B2D5CB2E3009C7A96 /* GalleryViewController.swift */; };
@@ -17,7 +21,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FA63C70C2D5E763800B84235 /* FullScreenImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenImageViewController.swift; sourceTree = "<group>"; };
 		FABD5FD42D5D0C1400BCEC74 /* GameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCell.swift; sourceTree = "<group>"; };
+		FABD5FD62D5E158000BCEC74 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		FABD5FD82D5E213200BCEC74 /* PrivacyPolicyViewControlle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewControlle.swift; sourceTree = "<group>"; };
+		FABD5FDA2D5E32F600BCEC74 /* TermsConditionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsConditionsViewController.swift; sourceTree = "<group>"; };
 		FABE7B742D5CB2E3009C7A96 /* Game Wallpapers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Game Wallpapers.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FABE7B772D5CB2E3009C7A96 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FABE7B792D5CB2E3009C7A96 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -62,6 +70,10 @@
 				FABE7B792D5CB2E3009C7A96 /* SceneDelegate.swift */,
 				FABE7B7B2D5CB2E3009C7A96 /* GalleryViewController.swift */,
 				FABD5FD42D5D0C1400BCEC74 /* GameCell.swift */,
+				FABD5FD62D5E158000BCEC74 /* AboutViewController.swift */,
+				FABD5FD82D5E213200BCEC74 /* PrivacyPolicyViewControlle.swift */,
+				FABD5FDA2D5E32F600BCEC74 /* TermsConditionsViewController.swift */,
+				FA63C70C2D5E763800B84235 /* FullScreenImageViewController.swift */,
 				FABE7B7D2D5CB2E3009C7A96 /* Main.storyboard */,
 				FABE7B802D5CB2E7009C7A96 /* Assets.xcassets */,
 				FABE7B822D5CB2E7009C7A96 /* LaunchScreen.storyboard */,
@@ -143,7 +155,11 @@
 			files = (
 				FABE7B7C2D5CB2E3009C7A96 /* GalleryViewController.swift in Sources */,
 				FABE7B782D5CB2E3009C7A96 /* AppDelegate.swift in Sources */,
+				FA63C70D2D5E763800B84235 /* FullScreenImageViewController.swift in Sources */,
+				FABD5FD92D5E213300BCEC74 /* PrivacyPolicyViewControlle.swift in Sources */,
+				FABD5FDB2D5E32F600BCEC74 /* TermsConditionsViewController.swift in Sources */,
 				FABE7B7A2D5CB2E3009C7A96 /* SceneDelegate.swift in Sources */,
+				FABD5FD72D5E158000BCEC74 /* AboutViewController.swift in Sources */,
 				FABD5FD52D5D0C1500BCEC74 /* GameCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
