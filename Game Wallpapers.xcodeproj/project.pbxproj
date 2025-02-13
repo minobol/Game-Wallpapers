@@ -71,12 +71,12 @@
 				FABE7B7B2D5CB2E3009C7A96 /* GalleryViewController.swift */,
 				FABD5FD42D5D0C1400BCEC74 /* GameCell.swift */,
 				FABD5FD62D5E158000BCEC74 /* AboutViewController.swift */,
+				FA63C70C2D5E763800B84235 /* FullScreenImageViewController.swift */,
 				FABD5FD82D5E213200BCEC74 /* PrivacyPolicyViewControlle.swift */,
 				FABD5FDA2D5E32F600BCEC74 /* TermsConditionsViewController.swift */,
-				FA63C70C2D5E763800B84235 /* FullScreenImageViewController.swift */,
 				FABE7B7D2D5CB2E3009C7A96 /* Main.storyboard */,
-				FABE7B802D5CB2E7009C7A96 /* Assets.xcassets */,
 				FABE7B822D5CB2E7009C7A96 /* LaunchScreen.storyboard */,
+				FABE7B802D5CB2E7009C7A96 /* Assets.xcassets */,
 				FABE7B852D5CB2E7009C7A96 /* Info.plist */,
 			);
 			path = "Game Wallpapers";

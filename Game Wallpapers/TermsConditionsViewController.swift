@@ -1,12 +1,6 @@
-//
-//  TermsConditionsViewController.swift
-//  Game Wallpapers
-//
-//  Created by MacBook on 13.02.2025.
-//
-
 import UIKit
 
+// MARK: - TermsConditionsViewController
 class TermsConditionsViewController: UIViewController {
 
     override func viewDidLoad() {
