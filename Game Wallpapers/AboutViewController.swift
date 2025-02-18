@@ -1,7 +1,6 @@
 import UIKit
 import UserNotifications
 
-// MARK: - AboutViewController
 class AboutViewController: UIViewController {
 
     @IBOutlet var notificationStackView: UIStackView!
@@ -12,7 +11,6 @@ class AboutViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupUI()
         loadNotificationState()
         requestNotificationAuthorization()
@@ -32,11 +30,9 @@ class AboutViewController: UIViewController {
     private func requestNotificationAuthorization() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
             DispatchQueue.main.async {
-                if granted {
-                    print("Разрешение на уведомления получено.")
-                } else if let error = error {
-                    print("Ошибка получения разрешения на уведомления: \(error)")
+                if !granted, let error = error {
                     self.showAlert(title: "Ошибка", message: "Не удалось получить разрешение на уведомления. Пожалуйста, проверьте настройки приложения.")
+                    print("Ошибка получения разрешения на уведомления: \(error)")
                 }
             }
         }
@@ -48,11 +44,7 @@ class AboutViewController: UIViewController {
 
     @IBAction func notificationsSwitchChanged(_ sender: UISwitch) {
         UserDefaults.standard.set(sender.isOn, forKey: "notificationsEnabled")
-        if sender.isOn {
-            scheduleLocalNotification()
-        } else {
-            cancelAllNotifications()
-        }
+        sender.isOn ? scheduleLocalNotification() : cancelAllNotifications()
     }
 
     func scheduleLocalNotification() {
@@ -62,17 +54,16 @@ class AboutViewController: UIViewController {
         content.sound = UNNotificationSound.default
 
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-
         let request = UNNotificationRequest(identifier: "imageReminder", content: content, trigger: trigger)
 
         UNUserNotificationCenter.current().add(request) { (error) in
             DispatchQueue.main.async {
                 if let error = error {
-                    print("Ошибка при отправке уведомления: \(error)")
                     self.showAlert(title: "Ошибка", message: "Не удалось запланировать уведомление: \(error.localizedDescription)")
+                    print("Ошибка при отправке уведомления: \(error)")
                 } else {
-                    print("Уведомление запланировано.")
                     self.showAlert(title: "Уведомление", message: "Уведомление запланировано на 5 секунд.")
+                    print("Уведомление запланировано.")
                 }
             }
         }
@@ -80,8 +71,8 @@ class AboutViewController: UIViewController {
 
     func cancelAllNotifications() {
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-        print("Все ожидающие уведомления отменены.")
         showAlert(title: "Уведомления", message: "Все уведомления отменены.")
+        print("Все ожидающие уведомления отменены.")
     }
 
     private func showAlert(title: String, message: String) {
@@ -90,4 +81,3 @@ class AboutViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
 }
-

@@ -1,6 +1,5 @@
 import UIKit
 
-// MARK: - FullScreenImageViewController
 class FullScreenImageViewController: UIViewController {
     @IBOutlet var fullScreenImageView: UIImageView!
     @IBOutlet var installFullButton: UIButton!
@@ -25,11 +24,11 @@ class FullScreenImageViewController: UIViewController {
     @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
         hideActivityIndicator()
         if let error = error {
-            print("Error saving image: \(error.localizedDescription)")
             showAlert(title: "Ошибка", message: "Не удалось сохранить изображение: \(error.localizedDescription)")
+            print("Error saving image: \(error.localizedDescription)")
         } else {
-            print("Image saved successfully")
             showAlert(title: "Успех", message: "Изображение успешно сохранено в фотоальбом.")
+            print("Image saved successfully")
         }
     }
 
@@ -47,8 +46,8 @@ class FullScreenImageViewController: UIViewController {
     }
 
     private func hideActivityIndicator() {
-        for subview in view.subviews {
-            if let activityIndicator = subview as? UIActivityIndicatorView {
+        view.subviews.forEach {
+            if let activityIndicator = $0 as? UIActivityIndicatorView {
                 activityIndicator.stopAnimating()
                 activityIndicator.removeFromSuperview()
             }

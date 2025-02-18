@@ -10,13 +10,14 @@ class GameCell: UICollectionViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-
     let gameNameLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 12)
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
         return label
     }()
 
@@ -53,7 +54,7 @@ class GameCell: UICollectionViewCell {
             gameImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             gameImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             gameImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            gameImageView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.75),
+            gameImageView.heightAnchor.constraint(equalToConstant: 162),
 
             gameNameLabel.topAnchor.constraint(equalTo: gameImageView.bottomAnchor, constant: 5),
             gameNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -72,11 +73,12 @@ class GameCell: UICollectionViewCell {
     @objc func downloadButtonTapped() {
         delegate?.downloadButtonTapped(at: indexPath!)
     }
-}
 
-// MARK: - GameCellDelegate
-protocol GameCellDelegate: AnyObject {
-    func downloadButtonTapped(at indexPath: IndexPath)
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        gameImageView.image = nil
+        gameNameLabel.text = nil
+    }
 }
 
 // MARK: - GameCell2
@@ -89,13 +91,14 @@ class GameCell2: UICollectionViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-
     let gameNameLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 12)
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
         return label
     }()
 
@@ -132,7 +135,7 @@ class GameCell2: UICollectionViewCell {
             gameImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             gameImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             gameImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            gameImageView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.75),
+            gameImageView.heightAnchor.constraint(equalToConstant: 162),
 
             gameNameLabel.topAnchor.constraint(equalTo: gameImageView.bottomAnchor, constant: 5),
             gameNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -151,4 +154,15 @@ class GameCell2: UICollectionViewCell {
     @objc func downloadButtonTapped() {
         delegate?.downloadButtonTapped(at: indexPath!)
     }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        gameImageView.image = nil
+        gameNameLabel.text = nil
+    }
+}
+
+// MARK: - GameCellDelegate
+protocol GameCellDelegate: AnyObject {
+    func downloadButtonTapped(at indexPath: IndexPath)
 }

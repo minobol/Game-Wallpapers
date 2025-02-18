@@ -55,11 +55,13 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
     var currentIndex = 0
     let activeImageViewWidth: CGFloat = 178
     let activeImageViewHeight: CGFloat = 318
-    let inactiveAlpha: CGFloat = 0.4
+    let dimmedAlpha: CGFloat = 0.4
     let cornerRadius: CGFloat = 20
     let spacing: CGFloat = 10
-    
-    var isScrolling = false // Track user-initiated scrolling
+    var isScrolling = false
+    let sideImageWidth: CGFloat = 156
+    let sideImageHeight: CGFloat = 283
+    let normalAlpha: CGFloat = 1.0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,20 +85,21 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
         gamesLabel.textColor = .white
     }
 
-    // MARK: - Image Slider Collection View Setup
     func setupImageSliderCollectionView() {
-        let layout = UICollectionViewFlowLayout()
+        let layout = CustomFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumInteritemSpacing = spacing
         layout.minimumLineSpacing = spacing
         layout.itemSize = CGSize(width: activeImageViewWidth, height: activeImageViewHeight)
 
-        // Настраиваем отступы, чтобы центральное изображение находилось в центре экрана
         let insetX = (view.bounds.width - activeImageViewWidth) / 2.0
         layout.sectionInset = UIEdgeInsets(top: 0, left: insetX, bottom: 0, right: insetX)
+      
+        layout.sideItemScale = sideImageWidth / activeImageViewWidth
+        layout.sideItemAlpha = dimmedAlpha
 
         imageSliderScrollView.collectionViewLayout = layout
-        imageSliderScrollView.isPagingEnabled = false // Отключаем стандартный пейджинг
+        imageSliderScrollView.isPagingEnabled = false
         imageSliderScrollView.showsHorizontalScrollIndicator = false
 
         imageSliderScrollView.register(ImageSliderCell.self, forCellWithReuseIdentifier: "ImageSliderCell")
@@ -108,16 +111,16 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
 
     func startTimer() {
-        timer?.invalidate() // Stop any existing timer
+        timer?.invalidate()
         timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(moveToNextPage), userInfo: nil, repeats: true)
     }
 
     @objc func moveToNextPage() {
-        if !isScrolling { // Prevent automatic scrolling during manual scroll
+        if !isScrolling {
             let nextIndex = (currentIndex + 1) % images.count
             scrollToIndex(nextIndex)
-            pageControl.currentPage = nextIndex // Обновляем текущую страницу на pageControl
-            currentIndex = nextIndex // Обновляем currentIndex для таймера
+            pageControl.currentPage = nextIndex
+            currentIndex = nextIndex
         }
     }
 
@@ -125,17 +128,10 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
         guard index >= 0 && index < images.count else { return }
         
         let indexPath = IndexPath(item: index, section: 0)
-        
-        // Прокрутка к элементу с анимацией.
         imageSliderScrollView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-        
-        // Обновляем текущий индекс и номер страницы.
         pageControl.currentPage = index
         currentIndex = index
     }
-
-    
-    // MARK: - UICollectionViewDataSource
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == imageSliderScrollView {
@@ -170,14 +166,40 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
         }
     }
 
-    
-    // MARK: - UICollectionViewDelegateFlowLayout
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        var selectedImage: UIImage?
+
+        if collectionView == imageSliderScrollView {
+            selectedImage = images[indexPath.item]
+        }
+        else if collectionView == gamesCollectionView {
+            selectedImage = gameImages[indexPath.row]
+        } else if collectionView == gamesCollectionView2 {
+            selectedImage = gameImages2[indexPath.row]
+        }
+
+        guard let image = selectedImage else {
+            print("No image selected")
+            return
+        }
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let fullScreenVC = storyboard.instantiateViewController(withIdentifier: "FullScreenImageViewController") as? FullScreenImageViewController else {
+            print("Could not instantiate FullScreenImageViewController")
+            return
+        }
+        
+        fullScreenVC.image = image
+        fullScreenVC.imageId = indexPath.row
+
+        self.present(fullScreenVC, animated: true, completion: nil)
+    }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == imageSliderScrollView {
             return CGSize(width: activeImageViewWidth, height: activeImageViewHeight)
         } else {
-            return CGSize(width: 90, height: 162)
+            return CGSize(width: 90, height: 206)
         }
     }
 
@@ -188,43 +210,36 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
         } else {
             return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         }
-   }
-
-    
-   // MARK: - UIScrollViewDelegate
+    }
 
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         if scrollView == imageSliderScrollView {
-            isScrolling = true // Пользователь начал прокрутку
-            timer?.invalidate() // Остановите таймер
+            isScrolling = true
+            timer?.invalidate()
         }
-   }
+    }
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if scrollView == imageSliderScrollView {
-            isScrolling = false // Пользователь закончил прокрутку
+            isScrolling = false
 
-            let layout = imageSliderScrollView.collectionViewLayout as! UICollectionViewFlowLayout
             let visibleRect = CGRect(origin: imageSliderScrollView.contentOffset, size: imageSliderScrollView.bounds.size)
             let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
 
             if let indexPath = imageSliderScrollView.indexPathForItem(at: visiblePoint) {
-                currentIndex = indexPath.item // Обновите currentIndex
+                currentIndex = indexPath.item
                 pageControl.currentPage = currentIndex
             }
 
-            startTimer() // Перезапустите таймер
+            startTimer()
         }
-   }
+    }
 
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         if scrollView == imageSliderScrollView {
-            isScrolling = false // Конец программной прокрутки
+            isScrolling = false
         }
-   }
-
-    
-   // MARK: - GameCellDelegate
+    }
 
     func downloadButtonTapped(at indexPath: IndexPath) {
         var imageToSave: UIImage?
@@ -241,7 +256,7 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
         }
 
         UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
-   }
+    }
 
     @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
         if let error = error {
@@ -249,7 +264,7 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
         } else {
             print("Image saved successfully")
         }
-   }
+    }
 }
 
 // MARK: - ImageSliderCell
@@ -283,6 +298,60 @@ class ImageSliderCell: UICollectionViewCell {
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        imageView.image = nil // Ensure image is reset for cell reuse
+        imageView.image = nil
+        imageView.alpha = 1.0
+    }
+}
+
+// MARK: - CustomFlowLayout
+class CustomFlowLayout: UICollectionViewFlowLayout {
+    
+    var sideItemScale: CGFloat = 1.0
+    var sideItemAlpha: CGFloat = 1.0
+
+    override func prepare() {
+        super.prepare()
+        self.scrollDirection = .horizontal
+        self.minimumLineSpacing = 10
+    }
+    
+    override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
+        return true
+    }
+
+    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+        guard let collectionView = collectionView else { return nil }
+
+        let visibleRect = CGRect(origin: collectionView.contentOffset, size: collectionView.bounds.size)
+        let centerX = visibleRect.midX
+
+        return super.layoutAttributesForElements(in: rect)?.map { attributes in
+            let distance = abs(attributes.center.x - centerX)
+            let scale = sideItemScale + (1 - sideItemScale) * (1 - distance / (collectionView.bounds.width / 2))
+            let alpha = sideItemAlpha + (1 - sideItemAlpha) * (1 - distance / (collectionView.bounds.width / 2))
+
+            attributes.transform = CGAffineTransform(scaleX: scale, y: scale)
+            attributes.alpha = alpha
+            return attributes
+        }
+    }
+
+    override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
+        guard let collectionView = collectionView else { return proposedContentOffset }
+
+        let targetRect = CGRect(x: proposedContentOffset.x, y: 0, width: collectionView.bounds.width, height: collectionView.bounds.height)
+        guard let layoutAttributes = super.layoutAttributesForElements(in: targetRect) else { return proposedContentOffset }
+
+        var offsetAdjustment = CGFloat.greatestFiniteMagnitude
+        let horizontalCenter = proposedContentOffset.x + (collectionView.bounds.width / 2)
+
+        for layoutAttribute in layoutAttributes {
+            let itemHorizontalCenter = layoutAttribute.center.x
+            if (abs(itemHorizontalCenter - horizontalCenter) < abs(offsetAdjustment)) {
+                offsetAdjustment = itemHorizontalCenter - horizontalCenter
+            }
+        }
+
+        return CGPoint(x: proposedContentOffset.x + offsetAdjustment, y: proposedContentOffset.y)
     }
 }
