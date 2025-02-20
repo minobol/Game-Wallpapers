@@ -59,11 +59,11 @@ class AboutViewController: UIViewController {
         UNUserNotificationCenter.current().add(request) { (error) in
             DispatchQueue.main.async {
                 if let error = error {
-                    self.showAlert(title: "Ошибка", message: "Не удалось запланировать уведомление: \(error.localizedDescription)")
+                    self.showAlert(title: "Ошибка", message: "Не удалось активировать уведомление: \(error.localizedDescription)")
                     print("Ошибка при отправке уведомления: \(error)")
                 } else {
-                    self.showAlert(title: "Уведомление", message: "Уведомление запланировано на 5 секунд.")
-                    print("Уведомление запланировано.")
+                    self.showAlert(title: "Уведомления активированы!", message: "Вы успешно активировали уведомления.")
+                    print("Уведомления активированы!")
                 }
             }
         }
@@ -71,7 +71,7 @@ class AboutViewController: UIViewController {
 
     func cancelAllNotifications() {
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-        showAlert(title: "Уведомления", message: "Все уведомления отменены.")
+        showAlert(title: "Уведомления отключены.", message: "Вы больше не будете получать уведомления от приложения.")
         print("Все ожидающие уведомления отменены.")
     }
 
