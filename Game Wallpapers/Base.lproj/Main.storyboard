@@ -287,10 +287,9 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Популярное" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1CY-bE-675">
-                                        <rect key="frame" x="11.666666666666657" y="121" width="370" height="25"/>
+                                        <rect key="frame" x="16" y="121" width="118" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="Eja-Pi-RVU"/>
-                                            <constraint firstAttribute="width" constant="370" id="cn2-Mv-VpW"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -411,10 +410,9 @@
                                         </cells>
                                     </collectionView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Игры" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VWY-6J-Fz2">
-                                        <rect key="frame" x="11.666666666666657" y="556" width="370" height="25"/>
+                                        <rect key="frame" x="16.000000000000004" y="556" width="51.333333333333343" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="QXA-Xj-CsA"/>
-                                            <constraint firstAttribute="width" constant="370" id="U79-K5-ei1"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -460,11 +458,12 @@
                                 <constraints>
                                     <constraint firstItem="JvI-Qt-qzC" firstAttribute="top" secondItem="VWY-6J-Fz2" secondAttribute="bottom" constant="28" id="4Lp-OS-KBL"/>
                                     <constraint firstAttribute="bottom" secondItem="JXC-94-Dhb" secondAttribute="bottom" constant="50" id="60t-TT-p5N"/>
+                                    <constraint firstItem="zPw-If-w1j" firstAttribute="leading" secondItem="JvI-Qt-qzC" secondAttribute="leading" id="6Gu-91-eOL"/>
                                     <constraint firstAttribute="trailing" secondItem="4N0-S2-4fM" secondAttribute="trailing" id="9H6-1r-QfE"/>
                                     <constraint firstItem="TbU-UG-hVV" firstAttribute="leading" secondItem="pMg-t6-ONo" secondAttribute="leading" constant="16" id="Qpv-lk-Med"/>
-                                    <constraint firstItem="1CY-bE-675" firstAttribute="leading" secondItem="zPw-If-w1j" secondAttribute="leading" id="TAC-PN-2aQ"/>
                                     <constraint firstItem="VWY-6J-Fz2" firstAttribute="top" secondItem="vlJ-k0-KpT" secondAttribute="bottom" constant="28" id="Two-y5-cP4"/>
                                     <constraint firstItem="TbU-UG-hVV" firstAttribute="top" secondItem="pMg-t6-ONo" secondAttribute="top" constant="35" id="UvS-5v-DeI"/>
+                                    <constraint firstItem="1CY-bE-675" firstAttribute="leading" secondItem="TbU-UG-hVV" secondAttribute="leading" id="VP8-nY-Ib8"/>
                                     <constraint firstItem="1CY-bE-675" firstAttribute="top" secondItem="TbU-UG-hVV" secondAttribute="bottom" constant="45" id="W3H-gz-oAa"/>
                                     <constraint firstItem="pMg-t6-ONo" firstAttribute="trailing" secondItem="4N0-S2-4fM" secondAttribute="trailing" id="XDq-xZ-UM3"/>
                                     <constraint firstItem="4N0-S2-4fM" firstAttribute="top" secondItem="bi9-A5-JUa" secondAttribute="top" constant="35" id="Xtv-Ay-xDt"/>
@@ -474,6 +473,7 @@
                                     <constraint firstItem="vlJ-k0-KpT" firstAttribute="centerX" secondItem="bi9-A5-JUa" secondAttribute="centerX" id="i8r-pe-50I"/>
                                     <constraint firstItem="zPw-If-w1j" firstAttribute="centerX" secondItem="bi9-A5-JUa" secondAttribute="centerX" id="lne-ab-qp9"/>
                                     <constraint firstItem="JXC-94-Dhb" firstAttribute="top" secondItem="JvI-Qt-qzC" secondAttribute="bottom" constant="20" id="mK5-9f-evd"/>
+                                    <constraint firstItem="VWY-6J-Fz2" firstAttribute="leading" secondItem="TbU-UG-hVV" secondAttribute="leading" id="zLo-qb-5dU"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="pCD-y2-LWj"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="pMg-t6-ONo"/>
@@ -483,12 +483,10 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="JvI-Qt-qzC" firstAttribute="centerX" secondItem="Oqm-Ap-w69" secondAttribute="centerX" id="6aj-qc-kmG"/>
-                            <constraint firstItem="1CY-bE-675" firstAttribute="centerX" secondItem="Oqm-Ap-w69" secondAttribute="centerX" id="NrB-RY-Haf"/>
                             <constraint firstAttribute="bottom" secondItem="bi9-A5-JUa" secondAttribute="bottom" id="Wdy-l8-JNJ"/>
                             <constraint firstItem="bi9-A5-JUa" firstAttribute="top" secondItem="RI8-oS-XL5" secondAttribute="top" id="Xc3-uv-w8A"/>
                             <constraint firstItem="bi9-A5-JUa" firstAttribute="leading" secondItem="RI8-oS-XL5" secondAttribute="leading" id="aEj-kl-FFc"/>
                             <constraint firstItem="JXC-94-Dhb" firstAttribute="centerX" secondItem="Oqm-Ap-w69" secondAttribute="centerX" id="ijr-hh-QG0"/>
-                            <constraint firstItem="VWY-6J-Fz2" firstAttribute="centerX" secondItem="Oqm-Ap-w69" secondAttribute="centerX" id="ygb-Be-3hQ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="mdy-Yu-Is5"/>
@@ -511,6 +509,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="7ZS-Ad-2Q8"/>
         <segue reference="Dxg-1b-Dk2"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="AccentColor"/>
